@@ -13,10 +13,10 @@ import java.util.ArrayList;
  */
 public class ListaExercicios {
     
-    private static ArrayList<Exercicio> exercicios;
+    private static ArrayList<Exercicio> exercicios = new ArrayList();
 
-    public ListaExercicios() {
-        this.exercicios = new ArrayList();
+    public static ArrayList<Exercicio> getExercicios() {
+        return exercicios;
     }
     
     public static Exercicio selecionarExercicio(String nome){
@@ -27,7 +27,7 @@ public class ListaExercicios {
         return null;
     }
     
-    public static void addExercicio(String nome,String descricao,String tipo){
+    public static void addExercicio(String nome,String descricao,char tipo){
         exercicios.add(NovoExercicio.criarExercicio(nome, descricao, tipo));
     }
 }

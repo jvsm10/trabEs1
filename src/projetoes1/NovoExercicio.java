@@ -11,7 +11,7 @@ package projetoes1;
  */
 public class NovoExercicio {
     
-    public static Exercicio criarExercicio(String nome,String descricao,String tipo){
+    public static Exercicio criarExercicio(String nome,String descricao,char tipo){
         Exercicio novo = new Exercicio(nome,descricao,tipo);
         return novo;
     }

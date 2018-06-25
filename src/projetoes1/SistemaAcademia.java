@@ -20,8 +20,10 @@ import java.util.logging.Logger;
  */
 public class SistemaAcademia {
     
+    private static ArrayList<RotinaAluno> rotina = new ArrayList();
+    
     public static void addAlunoArquio(ArrayList<Aluno> alunos){
-    String nomeArquivo = "alunos.dat";
+    String nomeArquivo = ".\\alunos.dat";
         FileOutputStream fos = null;
         ObjectOutputStream oos = null;
         try {
@@ -31,6 +33,7 @@ public class SistemaAcademia {
             for (Aluno alu : alunos){
                 oos.writeObject(alu);
             }
+            System.out.println("teste2");
             oos.close();
             fos.close();
         }catch (IOException ex) {
@@ -51,6 +54,7 @@ public class SistemaAcademia {
                 Aluno aluno = (Aluno) ois.readObject();
                 alunos.add( aluno );
             }
+            System.out.println("teste");
             return alunos;
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(SistemaAcademia.class.getName()).log(Level.SEVERE, null, ex);
@@ -65,5 +69,33 @@ public class SistemaAcademia {
             }
         }
         return null;
+    }
+    
+    public static RotinaAluno buscarRotina(int cpf){
+        for(int i=0;i<rotina.size();i++){
+            if(rotina.get(i).getCpf() == cpf){
+                RotinaAluno rot = rotina.get(i);
+                rotina.remove(i);
+                return rot;
+            }
+        }
+        return null;
+    }
+
+    private static int buscarRotinaInd(int cpf){
+        for(int i=0;i<rotina.size();i++){
+            if(rotina.get(i).getCpf() == cpf)
+                return i;
+        }
+        return -1;
+    }
+    
+    public static void addRotina(RotinaAluno rotina) {
+        SistemaAcademia.rotina.add(rotina);
+    }
+    
+    public static void marcarPrsenca(int cpf){
+        int i= SistemaAcademia.buscarRotinaInd(cpf);
+        rotina.get(i).atualizaPresenca();
     }
 }

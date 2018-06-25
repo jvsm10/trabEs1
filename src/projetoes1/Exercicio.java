@@ -13,9 +13,9 @@ public class Exercicio {
     
     private String nome;
     private String descricao;
-    private String tipo;
+    private char tipo;
 
-    public Exercicio(String nome, String descricao, String tipo) {
+    public Exercicio(String nome, String descricao, char tipo) {
         this.nome = nome;
         this.descricao = descricao;
         this.tipo = tipo;
@@ -29,7 +29,7 @@ public class Exercicio {
         return descricao;
     }
 
-    public String getTipo() {
+    public char getTipo() {
         return tipo;
     }
 
@@ -41,7 +41,7 @@ public class Exercicio {
         this.descricao = descricao;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(char tipo) {
         this.tipo = tipo;
     }
     

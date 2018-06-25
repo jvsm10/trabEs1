@@ -12,11 +12,7 @@ import java.util.ArrayList;
  * @author JOÃO VICTOR
  */
 public class ListaAlunos {
-    private static ArrayList<Aluno> alunos;
-
-    public ListaAlunos() {
-        this.alunos = new ArrayList();
-    }
+    private static ArrayList<Aluno> alunos = new ArrayList();
     
     public static void limpar(){
         alunos.clear();
