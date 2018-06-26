@@ -63,4 +63,8 @@ public class Controlador {
      public void marcarPrsenca(int cpf){
          SistemaAcademia.marcarPrsenca(cpf);
      }
+     
+     public int buscarLogin(String login,String senha){
+         return ListaAlunos.buscarLogin(login, senha);
+     }
 }

@@ -38,4 +38,12 @@ public class ListaAlunos {
         Aluno aluno = new Aluno(nome,id,senha,cpf);
         alunos.add(aluno);
     }
+    
+    public static int buscarLogin(String login,String senha){
+        for(int i=0;i<alunos.size();i++){
+            if(alunos.get(i).getId().equals(login) && alunos.get(i).getSenha().equals(senha))
+                return alunos.get(i).getCpf();
+        }
+        return -1;
+    }
 }

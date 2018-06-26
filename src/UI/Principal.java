@@ -56,6 +56,39 @@ public class Principal extends javax.swing.JFrame {
         }
            }
        }
+    private void completarRotina(RotinaAluno rotina){
+        ArrayList<Exercicio> exercicios = rotina.getExercicios();
+        ArrayList<String> serie = null;
+        serie=rotina.getSerie();
+        System.out.println(serie.size());
+       DefaultTableModel model = (DefaultTableModel) tabelarot.getModel();
+       if(exercicios != null){    
+           for(int i=0;i<exercicios.size();i++){
+               Object linha[] = new Object[3];
+               linha[0] = exercicios.get(i).getNome();
+               linha[1] = exercicios.get(i).getTipo();
+               if(serie.size()>0)
+               linha[2] = serie.get(i);
+               model.addRow(linha);
+        }
+           }
+       }
+    
+    private void completarRotinaAlu(ArrayList<Exercicio> exercicios,ArrayList<String> serie){
+       DefaultTableModel model = (DefaultTableModel) tabelarotinaaluno.getModel();
+       int i=0;
+       if(exercicios != null){    
+           for(Exercicio exercicio: exercicios){
+               Object linha[] = new Object[3];
+               linha[0] = exercicio.getNome();
+               linha[1] = exercicio.getTipo();
+               linha[2] = serie.get(i);
+               model.addRow(linha);
+               i++;
+        }
+           }
+       }
+    
     private void removerTabelaAlunos(){
        DefaultTableModel model = (DefaultTableModel) tabela1.getModel();
        int tam = tabela1.getRowCount();
@@ -70,6 +103,20 @@ public class Principal extends javax.swing.JFrame {
            model.removeRow(0);
        }
     }
+       private void removerTabelaRotina(){
+       DefaultTableModel model = (DefaultTableModel) tabelarot.getModel();
+       int tam = tabelarot.getRowCount();
+       for(int i=0; i<tam; i++){
+           model.removeRow(0);
+       }
+    }
+       private void removerTabelaRotinaAlu(){
+       DefaultTableModel model = (DefaultTableModel) tabelarotinaaluno.getModel();
+       int tam = tabelarotinaaluno.getRowCount();
+       for(int i=0; i<tam; i++){
+           model.removeRow(0);
+       }
+       }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -130,6 +177,19 @@ public class Principal extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         btnprocurar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jPanel8 = new javax.swing.JPanel();
+        cpfrot = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tabelarot = new javax.swing.JTable();
+        btnconserie = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jPanel9 = new javax.swing.JPanel();
+        jPanel10 = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        tabelarotinaaluno = new javax.swing.JTable();
+        btnsairusu = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -165,14 +225,14 @@ public class Principal extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(8, 8, 8)
                         .addComponent(entrar)
-                        .addGap(0, 120, Short.MAX_VALUE))
+                        .addGap(0, 125, Short.MAX_VALUE))
                     .addComponent(senha))
                 .addGap(248, 248, 248))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(159, Short.MAX_VALUE)
+                .addContainerGap(202, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(login, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
@@ -205,6 +265,11 @@ public class Principal extends javax.swing.JFrame {
 
         btg1.add(btrot);
         btrot.setText("Ver Rotina");
+        btrot.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btrotActionPerformed(evt);
+            }
+        });
 
         btg1.add(criarExer);
         criarExer.setText("Criar exercicio");
@@ -261,12 +326,12 @@ public class Principal extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 578, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 583, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -307,7 +372,7 @@ public class Principal extends javax.swing.JFrame {
                             .addComponent(aluid)
                             .addComponent(alusenha, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)))
                     .addComponent(AddAluno))
-                .addContainerGap(358, Short.MAX_VALUE))
+                .addContainerGap(363, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -330,7 +395,7 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(jLabel6))
                 .addGap(44, 44, 44)
                 .addComponent(AddAluno)
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addContainerGap(119, Short.MAX_VALUE))
         );
 
         root2.add(jPanel5, "card3");
@@ -366,7 +431,7 @@ public class Principal extends javax.swing.JFrame {
                             .addComponent(descex, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
                             .addComponent(nomeex)
                             .addComponent(tipoex))))
-                .addContainerGap(318, Short.MAX_VALUE))
+                .addContainerGap(323, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -385,7 +450,7 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(jLabel9))
                 .addGap(45, 45, 45)
                 .addComponent(btncriarex)
-                .addContainerGap(102, Short.MAX_VALUE))
+                .addContainerGap(137, Short.MAX_VALUE))
         );
 
         root2.add(jPanel3, "card4");
@@ -419,7 +484,7 @@ public class Principal extends javax.swing.JFrame {
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 578, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 583, Short.MAX_VALUE)
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -476,7 +541,7 @@ public class Principal extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnvoltar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnpassar, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+                            .addComponent(btnpassar, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
                             .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(34, 34, 34)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -506,13 +571,95 @@ public class Principal extends javax.swing.JFrame {
                         .addComponent(btnvoltar)
                         .addGap(36, 36, 36)
                         .addComponent(jButton1)
-                        .addGap(0, 69, Short.MAX_VALUE))
+                        .addGap(0, 104, Short.MAX_VALUE))
                     .addComponent(jScrollPane3)
                     .addComponent(jScrollPane4))
                 .addContainerGap())
         );
 
         root2.add(jPanel7, "card6");
+
+        jButton2.setText("Buscar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setText("CPF:");
+
+        tabelarot.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nome", "Tipo", "Serie"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane5.setViewportView(tabelarot);
+
+        btnconserie.setText("Confirmar serie");
+        btnconserie.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnconserieActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel11)
+                .addGap(18, 18, 18)
+                .addComponent(cpfrot, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(jButton2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 583, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnconserie))
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cpfrot, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2)
+                    .addComponent(jLabel11))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnconserie)
+                .addContainerGap(26, Short.MAX_VALUE))
+        );
+
+        root2.add(jPanel8, "card7");
+
+        jButton3.setText("Sair");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -534,7 +681,9 @@ public class Principal extends javax.swing.JFrame {
                         .addComponent(criarExer)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(aturot)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -547,13 +696,67 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(btrot)
                     .addComponent(criarExer)
                     .addComponent(aturot)
-                    .addComponent(btnexer))
+                    .addComponent(btnexer)
+                    .addComponent(jButton3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(root2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         root.add(jPanel1, "card3");
+
+        tabelarotinaaluno.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nome", "Tipo", "Serie"
+            }
+        ));
+        jScrollPane6.setViewportView(tabelarotinaaluno);
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
+        );
+
+        btnsairusu.setText("Sair");
+        btnsairusu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnsairusuActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnsairusu)))
+                .addContainerGap())
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnsairusu)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        root.add(jPanel9, "card4");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -571,11 +774,25 @@ public class Principal extends javax.swing.JFrame {
 
     private void entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarActionPerformed
         // TODO add your handling code here:
+        Controlador control = new Controlador();
         if(login.getText().equals("admin") && senha.getText().equals("admin")){
             CardLayout c = (CardLayout) root.getLayout();
                 c.show(root, "card3");
+                login.setText("");
+                senha.setText("");
                 removerTabelaAlunos();
                 completar();
+        }
+        else{
+            int cpf = control.buscarLogin(login.getText(), senha.getText());
+            if(cpf >=0){
+                CardLayout c = (CardLayout) root.getLayout();
+                c.show(root, "card4");
+                RotinaAluno rotina = control.obterRotina(cpf);
+                removerTabelaRotinaAlu();
+                completarRotinaAlu(rotina.getExercicios(),rotina.getSerie());
+                control.addRotina(rotina);
+            }
         }
     }//GEN-LAST:event_entrarActionPerformed
 
@@ -656,6 +873,8 @@ public class Principal extends javax.swing.JFrame {
         
     private void btnprocurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnprocurarActionPerformed
         // TODO add your handling code here:
+        list.clear();
+        lista2.clear();
         Controlador control = new Controlador();
         int cpf = Integer.parseInt(rotcpf.getText());
         RotinaAluno rotina = control.obterRotina(cpf);
@@ -686,24 +905,24 @@ public class Principal extends javax.swing.JFrame {
        }
        list1.setModel(lista2);
        list2.setModel(list);
-        
+        //control.addRotina(rotina);
     }//GEN-LAST:event_btnprocurarActionPerformed
 
     private void btnpassarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpassarActionPerformed
         // TODO add your handling code here:
-        if(list2.getSelectedValue()!=null){
-        list.addElement(list2.getSelectedValue());
-        lista2.remove(list2.getSelectedIndex());
-        list1.setModel(list);
+        if(list1.getSelectedValue()!=null){
+        list.addElement(list1.getSelectedValue());
+        lista2.remove(list1.getSelectedIndex());
+        list2.setModel(list);
         }
     }//GEN-LAST:event_btnpassarActionPerformed
 
     private void btnvoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnvoltarActionPerformed
         // TODO add your handling code here:
-        if(list1.getSelectedValue()!=null){
-        lista2.addElement(list1.getSelectedValue());
-        list.remove(list1.getSelectedIndex());
-        list2.setModel(lista2);
+        if(list2.getSelectedValue()!=null){
+        lista2.addElement(list2.getSelectedValue());
+        list.remove(list2.getSelectedIndex());
+        list1.setModel(lista2);
         }
     }//GEN-LAST:event_btnvoltarActionPerformed
 
@@ -711,19 +930,70 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
         String msg;
         Exercicio exercicio;
-        RotinaAluno rotina = null;
+        RotinaAluno rotina = new RotinaAluno();
         Controlador control = new Controlador();
         ArrayList<Exercicio> exercicios = new ArrayList();
-        for(int i=0;i<lista2.getSize();i++){
-            msg = lista2.getElementAt(i);
+        for(int i=0;i<list.getSize();i++){
+            msg = list.getElementAt(i);
             exercicio = control.obterExercicio(msg);
             exercicios.add(exercicio);
                 }
         msg = rotcpf.getText();
+        //RotinaAluno rot=control.obterRotina(Integer.parseInt(msg));
         rotina.setCpf(Integer.parseInt(msg));
         rotina.setExercicios(exercicios);
         control.addRotina(rotina);
+        list.clear();
+        lista2.clear();
+        rotcpf.setText("");
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btrotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btrotActionPerformed
+        // TODO add your handling code here:
+        CardLayout c = (CardLayout) root2.getLayout();
+        c.show(root2, "card7");
+        cpfrot.setText("");
+        removerTabelaRotina();
+    }//GEN-LAST:event_btrotActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        Controlador control = new Controlador();
+        int cpf = Integer.parseInt(cpfrot.getText());
+        RotinaAluno rotina = control.obterRotina(cpf);
+        removerTabelaRotina();
+        completarRotina(rotina);
+        control.addRotina(rotina);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        CardLayout c = (CardLayout) root.getLayout();
+                c.show(root, "card2");
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void btnconserieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnconserieActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) tabelarot.getModel();    
+        String msg; 
+        ArrayList<String> serie =new ArrayList();
+        for(int i=0;i<model.getRowCount();i++){
+               cpfrot.setFocusable(true);
+               msg = (String) model.getValueAt(i, 2);
+               serie.add(msg);
+        }
+        Controlador control = new Controlador();
+        int cpf = Integer.parseInt(cpfrot.getText());
+        RotinaAluno rotina = control.obterRotina(cpf);
+        rotina.setSerie(serie);
+        control.addRotina(rotina);
+    }//GEN-LAST:event_btnconserieActionPerformed
+
+    private void btnsairusuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsairusuActionPerformed
+        // TODO add your handling code here:
+        CardLayout c = (CardLayout) root.getLayout();
+                c.show(root, "card2");
+    }//GEN-LAST:event_btnsairusuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -770,18 +1040,24 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JRadioButton btadd;
     private javax.swing.JRadioButton btalu;
     private javax.swing.ButtonGroup btg1;
+    private javax.swing.JButton btnconserie;
     private javax.swing.JButton btncriarex;
     private javax.swing.JRadioButton btnexer;
     private javax.swing.JButton btnpassar;
     private javax.swing.JButton btnprocurar;
+    private javax.swing.JButton btnsairusu;
     private javax.swing.JButton btnvoltar;
     private javax.swing.JRadioButton btrot;
+    private javax.swing.JTextField cpfrot;
     private javax.swing.JRadioButton criarExer;
     private javax.swing.JTextField descex;
     private javax.swing.JButton entrar;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -791,16 +1067,21 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JList<String> list1;
     private javax.swing.JList<String> list2;
     private javax.swing.JTextField login;
@@ -811,6 +1092,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPasswordField senha;
     private javax.swing.JTable tabela1;
     private javax.swing.JTable tabela2;
+    private javax.swing.JTable tabelarot;
+    private javax.swing.JTable tabelarotinaaluno;
     private javax.swing.JTextField tipoex;
     // End of variables declaration//GEN-END:variables
 }

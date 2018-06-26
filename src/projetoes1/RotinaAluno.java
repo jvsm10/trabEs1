@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class RotinaAluno {
     
     private  ArrayList<Exercicio> exercicios;
+    private  ArrayList<String> serie = new ArrayList();
     private  int presenca;
     private  int cpf;
 
@@ -44,6 +45,15 @@ public class RotinaAluno {
     
     public void atualizaPresenca(){
         presenca+=1;
+    }
+
+    public ArrayList<String> getSerie() {
+        return serie;
+    }
+
+    public void setSerie(ArrayList<String> serie) {
+        this.serie.clear();
+        this.serie = serie;
     }
     
 }
