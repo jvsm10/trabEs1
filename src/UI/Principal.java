@@ -10,6 +10,7 @@ import java.awt.CardLayout;
 import java.util.ArrayList;
 import java.util.Calendar;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import projetoes1.Aluno;
 import projetoes1.Exercicio;
@@ -34,9 +35,10 @@ public class Principal extends javax.swing.JFrame {
        DefaultTableModel model = (DefaultTableModel) tabela1.getModel();
        if(aluno != null){    
            for(Aluno alunos: aluno){
-               Object linha[] = new Object[2];
+               Object linha[] = new Object[3];
                linha[0] = alunos.getNome();
                linha[1] = alunos.getCpf();
+               linha[2] = alunos.getDataentrada();
                model.addRow(linha);
         }
            }
@@ -134,6 +136,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         senha = new javax.swing.JPasswordField();
+        jLabel13 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         btalu = new javax.swing.JRadioButton();
         btadd = new javax.swing.JRadioButton();
@@ -184,12 +187,15 @@ public class Principal extends javax.swing.JFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         tabelarot = new javax.swing.JTable();
         btnconserie = new javax.swing.JButton();
+        labelpre = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jPanel9 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         tabelarotinaaluno = new javax.swing.JTable();
         btnsairusu = new javax.swing.JButton();
+        lbnome = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -204,35 +210,45 @@ public class Principal extends javax.swing.JFrame {
 
         login.setToolTipText("login");
 
-        jLabel1.setText("login:");
+        jLabel1.setText("Login:");
 
-        jLabel2.setText("senha:");
+        jLabel2.setText("Senha:");
 
         senha.setToolTipText("senha");
+
+        jLabel13.setFont(new java.awt.Font("Goudy Old Style", 0, 48)); // NOI18N
+        jLabel13.setText("Bem Vindo");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(98, 98, 98)
+                .addGap(123, 123, 123)
+                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(login)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(entrar)
-                        .addGap(0, 125, Short.MAX_VALUE))
-                    .addComponent(senha))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(entrar, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(98, 98, 98)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(login, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
+                            .addComponent(senha))))
                 .addGap(248, 248, 248))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(202, Short.MAX_VALUE)
+                .addContainerGap(57, Short.MAX_VALUE)
+                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(login, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
@@ -240,9 +256,9 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(senha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
+                .addGap(28, 28, 28)
                 .addComponent(entrar)
-                .addGap(114, 114, 114))
+                .addGap(115, 115, 115))
         );
 
         root.add(jPanel2, "card2");
@@ -302,14 +318,14 @@ public class Principal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nome", "CPF"
+                "Nome", "CPF", "Entrou"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.Integer.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -620,6 +636,10 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        labelpre.setText("  ");
+
+        jLabel12.setText("Total de presenças:");
+
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
@@ -631,7 +651,11 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(cpfrot, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addComponent(jButton2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel12)
+                .addGap(18, 18, 18)
+                .addComponent(labelpre, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37))
             .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 583, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -644,7 +668,9 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cpfrot, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2)
-                    .addComponent(jLabel11))
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel12)
+                    .addComponent(labelpre))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -739,10 +765,11 @@ public class Principal extends javax.swing.JFrame {
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addComponent(lbnome)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnsairusu)))
                 .addContainerGap())
         );
@@ -750,7 +777,9 @@ public class Principal extends javax.swing.JFrame {
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnsairusu)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnsairusu)
+                    .addComponent(lbnome))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -789,11 +818,20 @@ public class Principal extends javax.swing.JFrame {
                 CardLayout c = (CardLayout) root.getLayout();
                 c.show(root, "card4");
                 RotinaAluno rotina = control.obterRotina(cpf);
+                lbnome.setText(control.obterAluno(cpf).getNome());
                 removerTabelaRotinaAlu();
                 completarRotinaAlu(rotina.getExercicios(),rotina.getSerie());
+                int dia = Calendar.DAY_OF_MONTH;
+                if(dia>rotina.getDia() || (rotina.getDia()==30 && dia==1)||(rotina.getDia()==31 && dia==1)){
+                    rotina.setDia(dia);
+                    rotina.atualizaPresenca();
+                }
                 control.addRotina(rotina);
             }
+            else JOptionPane.showMessageDialog(rootPane, "login ou senha incorreto");
         }
+        login.setText("");
+                senha.setText("");
     }//GEN-LAST:event_entrarActionPerformed
 
     private void btaluActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btaluActionPerformed
@@ -824,6 +862,7 @@ public class Principal extends javax.swing.JFrame {
         alucpf.setText("");
         alusenha.setText("");
         aluid.setText("");
+        JOptionPane.showMessageDialog(rootPane, "Aluno adicionado");
     }//GEN-LAST:event_AddAlunoActionPerformed
 
     private void criarExerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_criarExerActionPerformed
@@ -844,6 +883,7 @@ public class Principal extends javax.swing.JFrame {
         nomeex.setText("");
         descex.setText("");
         tipoex.setText("");
+        JOptionPane.showMessageDialog(rootPane, "Exercicio criado");
     }//GEN-LAST:event_btncriarexActionPerformed
 
     private void btnexerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnexerActionPerformed
@@ -946,6 +986,7 @@ public class Principal extends javax.swing.JFrame {
         list.clear();
         lista2.clear();
         rotcpf.setText("");
+        JOptionPane.showMessageDialog(rootPane, "Rotina criada");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btrotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btrotActionPerformed
@@ -961,6 +1002,7 @@ public class Principal extends javax.swing.JFrame {
         Controlador control = new Controlador();
         int cpf = Integer.parseInt(cpfrot.getText());
         RotinaAluno rotina = control.obterRotina(cpf);
+        labelpre.setText(String.valueOf(rotina.getPresenca()));
         removerTabelaRotina();
         completarRotina(rotina);
         control.addRotina(rotina);
@@ -987,6 +1029,10 @@ public class Principal extends javax.swing.JFrame {
         RotinaAluno rotina = control.obterRotina(cpf);
         rotina.setSerie(serie);
         control.addRotina(rotina);
+        JOptionPane.showMessageDialog(rootPane, "Rotina atualizada");
+        removerTabelaRotina();
+        cpfrot.setText("");
+        labelpre.setText("");
     }//GEN-LAST:event_btnconserieActionPerformed
 
     private void btnsairusuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsairusuActionPerformed
@@ -1058,6 +1104,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1082,6 +1130,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JLabel labelpre;
+    private javax.swing.JLabel lbnome;
     private javax.swing.JList<String> list1;
     private javax.swing.JList<String> list2;
     private javax.swing.JTextField login;

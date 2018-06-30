@@ -5,6 +5,9 @@
  */
 package projetoes1;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -27,12 +30,20 @@ public class SistemaAcademia {
         FileOutputStream fos = null;
         ObjectOutputStream oos = null;
         try {
-            fos = new FileOutputStream(nomeArquivo);
-            oos = new ObjectOutputStream(fos);
-            oos.writeInt(alunos.size());
-            for (Aluno alu : alunos){
-                oos.writeObject(alu);
+            File arquivo = new File(nomeArquivo);
+            if(!arquivo.exists()){
+                System.out.println("nao existe");
             }
+            
+            fos = new FileOutputStream(arquivo);
+            
+            oos = new ObjectOutputStream(fos);
+            
+            oos.writeObject(alunos);
+//            oos.writeInt(alunos.size());
+//            for (Aluno alu : alunos){
+//                oos.writeObject(alu);
+//            }
             System.out.println("teste2");
             oos.close();
             fos.close();
@@ -41,19 +52,21 @@ public class SistemaAcademia {
             }
     }
     
-    public static ArrayList<Aluno> recuperarAlunos(){
-        String nomeArquivo = ".\\alunos.dat";
+    public static ArrayList<Aluno> recuperarAlunos() throws ClassNotFoundException{
+        String nomeArquivo = "alunos.dat";
         FileInputStream fis = null;
         ObjectInputStream ois = null;
         ArrayList<Aluno> alunos = new ArrayList(); 
         try {
-            fis = new FileInputStream(nomeArquivo);
+            File arquivo = new File(nomeArquivo);
+            fis = new FileInputStream(arquivo);
             ois = new ObjectInputStream(fis);
-            int numAlunos = ois.readInt();
-            for (int i=0; i<numAlunos; i++){
-                Aluno aluno = (Aluno) ois.readObject();
-                alunos.add( aluno );
-            }
+            alunos = (ArrayList<Aluno>) ois.readObject();
+            //int numAlunos = ois.readInt();
+//            for (int i=0; i<numAlunos; i++){
+//                Aluno aluno = (Aluno) ois.readObject();
+//                alunos.add( aluno );
+//            }
             System.out.println("teste");
             return alunos;
         } catch (ClassNotFoundException ex) {
@@ -92,10 +105,5 @@ public class SistemaAcademia {
     
     public static void addRotina(RotinaAluno rotina) {
         SistemaAcademia.rotina.add(rotina);
-    }
-    
-    public static void marcarPrsenca(int cpf){
-        int i= SistemaAcademia.buscarRotinaInd(cpf);
-        rotina.get(i).atualizaPresenca();
     }
 }

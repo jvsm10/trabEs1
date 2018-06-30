@@ -5,6 +5,8 @@
  */
 package projetoes1;
 
+import java.util.Calendar;
+
 /**
  *
  * @author JOÃO VICTOR
@@ -15,12 +17,14 @@ public class Aluno {
     private String id;
     private String senha;
     private int cpf;
+    private String dataentrada;
 
     public Aluno(String nome, String id, String senha, int cpf) {
         this.nome = nome;
         this.id = id;
         this.senha = senha;
         this.cpf = cpf;
+        this.dataentrada = Calendar.DAY_OF_MONTH + "/" + Calendar.MONTH + "/" + Calendar.YEAR;
     }
     
     public String getNome() {
@@ -53,6 +57,10 @@ public class Aluno {
 
     public void setCpf(int cpf) {
         this.cpf = cpf;
+    }
+
+    public String getDataentrada() {
+        return dataentrada;
     }
     
     

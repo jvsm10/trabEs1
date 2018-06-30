@@ -21,22 +21,13 @@ public class Controlador {
     
     public void addAluno(String nome,String id,String senha,int cpf){
          ListaAlunos.addAluno(nome, id, senha, cpf);
-         //SistemaAcademia.addAlunoArquio(ListaAlunos.getAlunos());
     }
     
     public Aluno obterAluno(int cpf){
-        //ListaAlunos.limpar();
-        //ArrayList<Aluno> alunos = new ArrayList();
-        //alunos = SistemaAcademia.recuperarAlunos();
-        //ListaAlunos.setAlunos(alunos);
         return ListaAlunos.obterAluno(cpf);
     }
     
      public ArrayList<Aluno> obterAlunos(){
-        //ListaAlunos.limpar();
-        //ArrayList<Aluno> alunos = new ArrayList();
-        //alunos = SistemaAcademia.recuperarAlunos();
-        //ListaAlunos.setAlunos(alunos);
         return ListaAlunos.getAlunos();
     }
      
@@ -58,10 +49,6 @@ public class Controlador {
      
      public RotinaAluno obterRotina(int cpf){
          return SistemaAcademia.buscarRotina(cpf);
-     }
-     
-     public void marcarPrsenca(int cpf){
-         SistemaAcademia.marcarPrsenca(cpf);
      }
      
      public int buscarLogin(String login,String senha){

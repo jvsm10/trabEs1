@@ -17,10 +17,12 @@ public class RotinaAluno {
     private  ArrayList<String> serie = new ArrayList();
     private  int presenca;
     private  int cpf;
+    private int dia;
 
     public RotinaAluno() {
         presenca = 0;
         exercicios = new ArrayList();
+        dia=0;
     }
 
     public ArrayList<Exercicio> getExercicios() {
@@ -55,5 +57,14 @@ public class RotinaAluno {
         this.serie.clear();
         this.serie = serie;
     }
+
+    public void setDia(int dia) {
+        this.dia = dia;
+    }
+
+    public int getDia() {
+        return dia;
+    }
+    
     
 }

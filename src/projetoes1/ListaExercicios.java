@@ -28,6 +28,7 @@ public class ListaExercicios {
     }
     
     public static void addExercicio(String nome,String descricao,char tipo){
-        exercicios.add(NovoExercicio.criarExercicio(nome, descricao, tipo));
+        Exercicio novo = new Exercicio(nome,descricao,tipo);
+        exercicios.add(novo);
     } 
 }
